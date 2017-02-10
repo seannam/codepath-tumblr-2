@@ -91,7 +91,7 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func loadMoreData() {
-        let url = URL(string:"https://api.tumblr.com/v2/blog/humansofnewyork.tumblr.com/posts/photo?api_key=Q6vHoaVm5L1u2ZAW1fqv3Jw48gFzYVg9P0vH0VHl3GVy6quoGV&[offset=\(offsetCnt)]")
+        let url = URL(string:"https://api.tumblr.com/v2/blog/humansofnewyork.tumblr.com/posts/photo?api_key=Q6vHoaVm5L1u2ZAW1fqv3Jw48gFzYVg9P0vH0VHl3GVy6quoGV&offset=\(offsetCnt)")
         let request = URLRequest(url: url!)
         let session = URLSession(
             configuration: URLSessionConfiguration.default,
@@ -118,8 +118,7 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
                         let responseFieldDictionary = responseDictionary["response"] as! NSDictionary
                         
                         // This is where you will store the returned array of posts in your posts property
-                        self.posts += responseFieldDictionary["posts"] as! [NSDictionary]
-                        
+                        self.posts.append(contentsOf: responseFieldDictionary["posts"] as! [NSDictionary])
                         self.tableView.reloadData()
                     }
                 }
